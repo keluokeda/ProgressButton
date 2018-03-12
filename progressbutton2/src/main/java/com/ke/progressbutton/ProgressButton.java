@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -21,12 +22,12 @@ public class ProgressButton extends FrameLayout {
 
     public ProgressButton(@NonNull Context context) {
         super(context);
-        init(context, null,0);
+        init(context, null, 0);
     }
 
     public ProgressButton(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init(context, attrs,0);
+        init(context, attrs, 0);
     }
 
     public ProgressButton(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
@@ -35,7 +36,7 @@ public class ProgressButton extends FrameLayout {
     }
 
 
-    private void init(@NonNull Context context, @Nullable AttributeSet attributeSet,int defStyleAttr) {
+    private void init(@NonNull Context context, @Nullable AttributeSet attributeSet, int defStyleAttr) {
 
         if (attributeSet == null) {
             return;
@@ -46,7 +47,7 @@ public class ProgressButton extends FrameLayout {
         String text = typedArray.getString(R.styleable.ProgressButton_btn_text);
 
         int textColor = typedArray.getColor(R.styleable.ProgressButton_btn_text_color, Color.BLACK);
-        float textSize = typedArray.getFloat(R.styleable.ProgressButton_btn_text_size, 16);
+        float textSize = typedArray.getFloat(R.styleable.ProgressButton_btn_text_size, 14);
 
 
         mButton = new Button(context);
@@ -63,7 +64,7 @@ public class ProgressButton extends FrameLayout {
         mProgressBar.setIndeterminate(true);
         mProgressBar.setVisibility(INVISIBLE);
         LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
-        addView(mProgressBar,layoutParams);
+        addView(mProgressBar, layoutParams);
 
         typedArray.recycle();
     }
@@ -85,9 +86,18 @@ public class ProgressButton extends FrameLayout {
 
 
     @Override
-    public void setOnClickListener(@Nullable OnClickListener l) {
+    public void setOnClickListener(final @Nullable OnClickListener l) {
 //        super.setOnClickListener(l);
-        mButton.setOnClickListener(l);
+//        mButton.setOnClickListener(l);
+        mButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                l.onClick(ProgressButton.this);
+                if (l!=null){
+                    l.onClick(ProgressButton.this);
+                }
+            }
+        });
         mButton.setId(getId());
     }
 }
