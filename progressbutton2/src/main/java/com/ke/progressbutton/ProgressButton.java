@@ -88,5 +88,6 @@ public class ProgressButton extends FrameLayout {
     public void setOnClickListener(@Nullable OnClickListener l) {
 //        super.setOnClickListener(l);
         mButton.setOnClickListener(l);
+        mButton.setId(getId());
     }
 }
