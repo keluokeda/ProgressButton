@@ -69,6 +69,17 @@ public class ProgressButton extends FrameLayout {
         typedArray.recycle();
     }
 
+    @Override
+    public void setEnabled(boolean enabled) {
+//        super.setEnabled(enabled);
+        mButton.setEnabled(enabled);
+    }
+
+    @Override
+    public boolean isEnabled() {
+//        return super.isEnabled();
+        return mButton.isEnabled();
+    }
 
     public void setProgressShow(boolean isShow) {
         if (isShow) {
@@ -93,7 +104,7 @@ public class ProgressButton extends FrameLayout {
             @Override
             public void onClick(View v) {
 //                l.onClick(ProgressButton.this);
-                if (l!=null){
+                if (l != null) {
                     l.onClick(ProgressButton.this);
                 }
             }
